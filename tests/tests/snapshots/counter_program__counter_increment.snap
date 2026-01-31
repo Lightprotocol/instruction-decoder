@@ -1,0 +1,30 @@
+---
+source: tests/tests/counter_program.rs
+expression: snapshot
+---
+{
+  "signature": "3wYxh96oe4BEejhvHAEaH3T69hvyLaAQWs1ejcYjJmNKR8hRpUVBGxAWX9ZnA2YaKWBUbe5rwnsLeKVDK8mxfoNj",
+  "status": "Success",
+  "fee": 5000,
+  "compute_used": 1173,
+  "instructions": [
+    {
+      "program_id": "Counter111111111111111111111111111111111111",
+      "program_name": "Counter",
+      "instruction_name": "Increment",
+      "accounts": [
+        {
+          "pubkey": "mBKqcnGotbsSb5vNrdyhzZ5EhqZdids9QYiTRckvi7v",
+          "is_signer": false,
+          "is_writable": true
+        },
+        {
+          "pubkey": "5Z6Ay5NEcbg3xhopc522sBCRXQujkTiuDRnHGfQdcnSf",
+          "is_signer": true,
+          "is_writable": true
+        }
+      ],
+      "decoded_fields": []
+    }
+  ]
+}

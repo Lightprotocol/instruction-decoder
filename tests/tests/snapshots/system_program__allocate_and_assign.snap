@@ -1,0 +1,43 @@
+---
+source: tests/tests/system_program.rs
+expression: snapshot
+---
+{
+  "signature": "3zGKLXetKEyijAgXUvdNwJtqDLkBGYQxFUZDZskgeBddNiY6kpNgmm5vf6YDvZZx9a5Srkarc8Jeao82NehX5Lcm",
+  "status": "Success",
+  "fee": 10000,
+  "compute_used": 300,
+  "instructions": [
+    {
+      "program_id": "11111111111111111111111111111111",
+      "program_name": "System Program",
+      "instruction_name": "Allocate",
+      "accounts": [
+        {
+          "pubkey": "8SFqwqnq4whPhs8icwHA2hQg3hUoN1qrCLK1SBx3WKwe",
+          "is_signer": true,
+          "is_writable": true
+        }
+      ],
+      "decoded_fields": [
+        {
+          "name": "space",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "program_id": "11111111111111111111111111111111",
+      "program_name": "System Program",
+      "instruction_name": "Assign",
+      "accounts": [
+        {
+          "pubkey": "8SFqwqnq4whPhs8icwHA2hQg3hUoN1qrCLK1SBx3WKwe",
+          "is_signer": true,
+          "is_writable": true
+        }
+      ],
+      "decoded_fields": []
+    }
+  ]
+}

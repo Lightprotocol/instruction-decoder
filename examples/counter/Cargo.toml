@@ -1,0 +1,14 @@
+[package]
+name = "counter"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+
+[dependencies]
+anchor-lang = "0.32"
+light-instruction-decoder-derive = { workspace = true }
+
+[target.'cfg(not(target_os = "solana"))'.dependencies]
+light-instruction-decoder = { workspace = true }

@@ -1,0 +1,91 @@
+---
+source: tests/tests/counter_program.rs
+expression: snapshot
+---
+{
+  "signature": "2uw53JAZSwML7mybGN8VM7Qgd3PGsfzn6s35T3G4AUUHXcZ9j9hGKrQHGjaezc1ZCKtsMPXS2eht7Exct1Dd9Pwm",
+  "status": "Success",
+  "fee": 5000,
+  "compute_used": 4281,
+  "instructions": [
+    {
+      "program_id": "Counter111111111111111111111111111111111111",
+      "program_name": "Counter",
+      "instruction_name": "Configure",
+      "accounts": [
+        {
+          "pubkey": "AoVsGaj8MSJ6xwKxfFxo9iZWH3enC8RRTXKH2fx2F8os",
+          "is_signer": false,
+          "is_writable": true
+        },
+        {
+          "pubkey": "5Z6Ay5NEcbg3xhopc522sBCRXQujkTiuDRnHGfQdcnSf",
+          "is_signer": true,
+          "is_writable": true
+        },
+        {
+          "pubkey": "3BuW9SR5tG6VFK4MmkQQ3Ak8ny1K1Vv5Uz7is8Aa5pwG",
+          "is_signer": false,
+          "is_writable": false
+        },
+        {
+          "pubkey": "FMUEmtxhU46GzhKF4FW9MLJdQWiLgjiXP9TYRWSrqTpV",
+          "is_signer": false,
+          "is_writable": true
+        },
+        {
+          "pubkey": "6TcyBfPdBt1kjsvDZLzmBFnuMaLWiTaAt4RjUr9VA5YD",
+          "is_signer": false,
+          "is_writable": false
+        },
+        {
+          "pubkey": "4MfyR4G3NWfVRDWo6iNAHDBZqWMgwZX6FNtMqEW3a9JT",
+          "is_signer": false,
+          "is_writable": false
+        },
+        {
+          "pubkey": "6c5fX1cKYGRNNbozjDdUr2s5vfUuS1XTistmZeG2kZY6",
+          "is_signer": false,
+          "is_writable": false
+        },
+        {
+          "pubkey": "4Mz4Y6iXdBdAbPMv874YWPgH2oy6QKARovMt2pNurh6e",
+          "is_signer": false,
+          "is_writable": false
+        },
+        {
+          "pubkey": "11111111111111111111111111111111",
+          "is_signer": false,
+          "is_writable": false
+        },
+        {
+          "pubkey": "SysvarRent111111111111111111111111111111111",
+          "is_signer": false,
+          "is_writable": false
+        }
+      ],
+      "decoded_fields": [
+        {
+          "name": "new_value",
+          "value": "999"
+        },
+        {
+          "name": "multiplier",
+          "value": "7"
+        },
+        {
+          "name": "enabled",
+          "value": "true"
+        },
+        {
+          "name": "label",
+          "value": "[\n    104,\n    101,\n    108,\n    108,\n    111,\n    95,\n    119,\n    111,\n    114,\n    108,\n    100,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n]"
+        },
+        {
+          "name": "nonce",
+          "value": "12345"
+        }
+      ]
+    }
+  ]
+}

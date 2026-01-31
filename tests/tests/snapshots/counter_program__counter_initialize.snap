@@ -1,0 +1,64 @@
+---
+source: tests/tests/counter_program.rs
+expression: snapshot
+---
+{
+  "signature": "4DySUV8MPozC8yUfFqX9J7r5azJz7MRvhebUjqkQTgmcHHJiFhQptpABSkBe1emRF5odQHYCKU5wrwKMh4bkZrGB",
+  "status": "Success",
+  "fee": 10000,
+  "compute_used": 4413,
+  "instructions": [
+    {
+      "program_id": "Counter111111111111111111111111111111111111",
+      "program_name": "Counter",
+      "instruction_name": "Initialize",
+      "accounts": [
+        {
+          "pubkey": "7v54NWdBtkjuAFJrLGsS2SXnuk8nKam81mZJeeYxVFi9",
+          "is_signer": true,
+          "is_writable": true
+        },
+        {
+          "pubkey": "5Z6Ay5NEcbg3xhopc522sBCRXQujkTiuDRnHGfQdcnSf",
+          "is_signer": true,
+          "is_writable": true
+        },
+        {
+          "pubkey": "11111111111111111111111111111111",
+          "is_signer": false,
+          "is_writable": false
+        }
+      ],
+      "decoded_fields": [],
+      "inner_instructions": [
+        {
+          "program_id": "11111111111111111111111111111111",
+          "program_name": "System Program",
+          "instruction_name": "CreateAccount",
+          "accounts": [
+            {
+              "pubkey": "5Z6Ay5NEcbg3xhopc522sBCRXQujkTiuDRnHGfQdcnSf",
+              "is_signer": true,
+              "is_writable": true
+            },
+            {
+              "pubkey": "7v54NWdBtkjuAFJrLGsS2SXnuk8nKam81mZJeeYxVFi9",
+              "is_signer": true,
+              "is_writable": true
+            }
+          ],
+          "decoded_fields": [
+            {
+              "name": "lamports",
+              "value": "1224960"
+            },
+            {
+              "name": "space",
+              "value": "48"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

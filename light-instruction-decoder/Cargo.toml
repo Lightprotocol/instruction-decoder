@@ -1,0 +1,21 @@
+[package]
+name = "light-instruction-decoder"
+version = "0.2.0"
+description = "Instruction decoder library for litesvm tests."
+license = "Apache-2.0"
+edition = "2021"
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(target_os, values("solana"))'] }
+
+[dependencies]
+solana-pubkey = { workspace = true }
+solana-instruction = { workspace = true }
+solana-signature = { workspace = true }
+borsh = { workspace = true }
+bs58 = { workspace = true }
+serde = { workspace = true }
+light-instruction-decoder-derive = { workspace = true }
+
+[target.'cfg(not(target_os = "solana"))'.dependencies]
+tabled = { workspace = true }

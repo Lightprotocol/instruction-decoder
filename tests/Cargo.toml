@@ -1,0 +1,51 @@
+[package]
+name = "instruction-decoder-tests"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+light-instruction-decoder = { workspace = true }
+litesvm = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+solana-pubkey = { workspace = true }
+solana-instruction = { workspace = true }
+solana-signature = { workspace = true }
+solana-message = { workspace = true }
+solana-transaction = { workspace = true }
+solana-keypair = { workspace = true }
+solana-signer = { workspace = true }
+solana-system-interface = { workspace = true }
+solana-native-token = { workspace = true }
+solana-hash = { workspace = true }
+solana-program-pack = { workspace = true }
+solana-program-option = { workspace = true }
+zeroize = { workspace = true }
+counter = { path = "../examples/counter" }
+sha2 = { workspace = true }
+# Pin litesvm transitive deps to 3.0.x (litesvm source not yet compatible with 3.1.x)
+agave-feature-set = { workspace = true }
+agave-reserved-account-keys = { workspace = true }
+agave-syscalls = { workspace = true }
+solana-bpf-loader-program = { workspace = true }
+solana-builtins = { workspace = true }
+solana-builtins-default-costs = { workspace = true }
+solana-compute-budget = { workspace = true }
+solana-compute-budget-instruction = { workspace = true }
+solana-compute-budget-program = { workspace = true }
+solana-fee = { workspace = true }
+solana-loader-v4-program = { workspace = true }
+solana-program-runtime = { workspace = true }
+solana-svm-callback = { workspace = true }
+solana-svm-feature-set = { workspace = true }
+solana-svm-log-collector = { workspace = true }
+solana-svm-measure = { workspace = true }
+solana-svm-timings = { workspace = true }
+solana-svm-transaction = { workspace = true }
+solana-svm-type-overrides = { workspace = true }
+solana-system-program = { workspace = true }
+solana-transaction-context = { workspace = true }
+solana-vote-program = { workspace = true }
+
+[dev-dependencies]
+insta = { workspace = true }

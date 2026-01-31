@@ -1,0 +1,35 @@
+---
+source: tests/tests/counter_program.rs
+expression: snapshot
+---
+{
+  "signature": "2txCbjETvNuCXVSNBa9UJMjJUBXDM88oYBjCmWmHHssNfvX7AwdBqXkjyFRUGCPB9gJURArrh7EohaSeSBsvc2NU",
+  "status": "Success",
+  "fee": 5000,
+  "compute_used": 1184,
+  "instructions": [
+    {
+      "program_id": "Counter111111111111111111111111111111111111",
+      "program_name": "Counter",
+      "instruction_name": "Set",
+      "accounts": [
+        {
+          "pubkey": "mBKqcnGotbsSb5vNrdyhzZ5EhqZdids9QYiTRckvi7v",
+          "is_signer": false,
+          "is_writable": true
+        },
+        {
+          "pubkey": "5Z6Ay5NEcbg3xhopc522sBCRXQujkTiuDRnHGfQdcnSf",
+          "is_signer": true,
+          "is_writable": true
+        }
+      ],
+      "decoded_fields": [
+        {
+          "name": "value",
+          "value": "42"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+---
+source: tests/tests/system_program.rs
+expression: snapshot
+---
+{
+  "signature": "35wnxL2yTyeTbFj2FnCreVcJHgDAXz3frvWfbKeRM87hBgbmo7fcKvT6Js2wGgMi5WApxQrNvsZgtZpUc5wnSQkR",
+  "status": "Success",
+  "fee": 5000,
+  "compute_used": 150,
+  "instructions": [
+    {
+      "program_id": "11111111111111111111111111111111",
+      "program_name": "System Program",
+      "instruction_name": "Transfer",
+      "accounts": [
+        {
+          "pubkey": "AKnL4NNf3DGWZJS6cPknBuEGnVsV4A4m5tgebLHaRSZ9",
+          "is_signer": true,
+          "is_writable": true
+        },
+        {
+          "pubkey": "9hSR6S7WPtxmTojgo6GG3k4yDPecgJY292j7xrsUGWBu",
+          "is_signer": false,
+          "is_writable": true
+        }
+      ],
+      "decoded_fields": [
+        {
+          "name": "lamports",
+          "value": "1000000000"
+        }
+      ]
+    }
+  ]
+}

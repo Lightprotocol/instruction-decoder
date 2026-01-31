@@ -1,0 +1,39 @@
+---
+source: tests/tests/system_program.rs
+expression: snapshot
+---
+{
+  "signature": "5ix5brBTwq7K9Zinf7zUZpHuzr6C3K6uQ4jr4gFoBny3q6Jy8Qz42ij4o1xoWbCiGXEZkUArgokMmHBe4J9Cr2NH",
+  "status": "Success",
+  "fee": 10000,
+  "compute_used": 150,
+  "instructions": [
+    {
+      "program_id": "11111111111111111111111111111111",
+      "program_name": "System Program",
+      "instruction_name": "CreateAccount",
+      "accounts": [
+        {
+          "pubkey": "AKnL4NNf3DGWZJS6cPknBuEGnVsV4A4m5tgebLHaRSZ9",
+          "is_signer": true,
+          "is_writable": true
+        },
+        {
+          "pubkey": "GyGKxMyg1p9SsHfm15MkNUu1u9TN2JtTspcdmrtGUdse",
+          "is_signer": true,
+          "is_writable": true
+        }
+      ],
+      "decoded_fields": [
+        {
+          "name": "lamports",
+          "value": "1000000000"
+        },
+        {
+          "name": "space",
+          "value": "100"
+        }
+      ]
+    }
+  ]
+}
