@@ -1,6 +1,6 @@
 [package]
 name = "light-instruction-decoder-derive"
-version = "0.2.0"
+version.workspace = true
 description = "Derive macros for InstructionDecoder implementations"
 license = "Apache-2.0"
 edition = "2021"

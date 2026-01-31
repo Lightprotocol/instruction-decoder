@@ -1,6 +1,6 @@
 [package]
 name = "light-instruction-decoder"
-version = "0.2.0"
+version.workspace = true
 description = "Instruction decoder library for litesvm tests."
 license = "Apache-2.0"
 edition = "2021"
