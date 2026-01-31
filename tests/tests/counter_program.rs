@@ -19,13 +19,17 @@ fn setup() -> (LiteSVM, Keypair) {
     let program_bytes = include_bytes!("../../target/deploy/counter.so");
     let _ = svm.add_program(COUNTER_PROGRAM_ID, program_bytes);
     let payer = deterministic_keypair(10);
-    svm.airdrop(&payer.pubkey(), 10 * LAMPORTS_PER_SOL)
-        .unwrap();
+    svm.airdrop(&payer.pubkey(), 10 * LAMPORTS_PER_SOL).unwrap();
     (svm, payer)
 }
 
 /// Build an Anchor instruction: 8-byte discriminator + borsh-serialized args
-fn anchor_ix(program_id: &Pubkey, discriminator: &[u8; 8], data: &[u8], accounts: Vec<solana_instruction::AccountMeta>) -> solana_instruction::Instruction {
+fn anchor_ix(
+    program_id: &Pubkey,
+    discriminator: &[u8; 8],
+    data: &[u8],
+    accounts: Vec<solana_instruction::AccountMeta>,
+) -> solana_instruction::Instruction {
     let mut ix_data = discriminator.to_vec();
     ix_data.extend_from_slice(data);
     solana_instruction::Instruction::new_with_bytes(*program_id, &ix_data, accounts)
@@ -33,7 +37,7 @@ fn anchor_ix(program_id: &Pubkey, discriminator: &[u8; 8], data: &[u8], accounts
 
 /// Compute Anchor discriminator: sha256("global:<name>")[..8]
 fn anchor_discriminator(name: &str) -> [u8; 8] {
-    use sha2::{Sha256, Digest};
+    use sha2::{Digest, Sha256};
     let mut hasher = Sha256::new();
     hasher.update(format!("global:{name}").as_bytes());
     let hash = hasher.finalize();
@@ -56,7 +60,10 @@ fn test_decode_initialize() {
         vec![
             solana_instruction::AccountMeta::new(counter.pubkey(), true),
             solana_instruction::AccountMeta::new(payer.pubkey(), true),
-            solana_instruction::AccountMeta::new_readonly(solana_pubkey::pubkey!("11111111111111111111111111111111"), false),
+            solana_instruction::AccountMeta::new_readonly(
+                solana_pubkey::pubkey!("11111111111111111111111111111111"),
+                false,
+            ),
         ],
     );
 
@@ -94,12 +101,18 @@ fn test_decode_increment_and_set() {
         vec![
             solana_instruction::AccountMeta::new(counter.pubkey(), true),
             solana_instruction::AccountMeta::new(payer.pubkey(), true),
-            solana_instruction::AccountMeta::new_readonly(solana_pubkey::pubkey!("11111111111111111111111111111111"), false),
+            solana_instruction::AccountMeta::new_readonly(
+                solana_pubkey::pubkey!("11111111111111111111111111111111"),
+                false,
+            ),
         ],
     );
     let msg = Message::new(&[init_ix], Some(&payer.pubkey()));
     let tx = Transaction::new(&[&payer, &counter], msg, svm.latest_blockhash());
-    svm.send_transaction(solana_transaction::versioned::VersionedTransaction::from(tx)).unwrap();
+    svm.send_transaction(solana_transaction::versioned::VersionedTransaction::from(
+        tx,
+    ))
+    .unwrap();
 
     // Increment
     let inc_ix = anchor_ix(
@@ -180,8 +193,10 @@ fn test_decode_configure() {
     );
     let msg = Message::new(&[init_ix], Some(&payer.pubkey()));
     let tx = Transaction::new(&[&payer, &counter], msg, svm.latest_blockhash());
-    svm.send_transaction(solana_transaction::versioned::VersionedTransaction::from(tx))
-        .unwrap();
+    svm.send_transaction(solana_transaction::versioned::VersionedTransaction::from(
+        tx,
+    ))
+    .unwrap();
 
     // Build configure instruction data:
     // new_value: u64, multiplier: u16, enabled: bool, label: [u8; 32], nonce: u64
@@ -243,9 +258,15 @@ fn test_decode_configure() {
 
     // Verify decoded fields
     let fields = snapshot.instructions[0].decoded_fields.as_ref().unwrap();
-    assert!(fields.iter().any(|f| f.name == "new_value" && f.value == "999"));
-    assert!(fields.iter().any(|f| f.name == "multiplier" && f.value == "7"));
-    assert!(fields.iter().any(|f| f.name == "nonce" && f.value == "12345"));
+    assert!(fields
+        .iter()
+        .any(|f| f.name == "new_value" && f.value == "999"));
+    assert!(fields
+        .iter()
+        .any(|f| f.name == "multiplier" && f.value == "7"));
+    assert!(fields
+        .iter()
+        .any(|f| f.name == "nonce" && f.value == "12345"));
 
     insta::assert_json_snapshot!("counter_configure", snapshot);
 }

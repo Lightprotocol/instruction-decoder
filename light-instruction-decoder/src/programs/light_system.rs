@@ -13,14 +13,14 @@
 // Allow the macro-generated code to reference types from this crate
 extern crate self as light_instruction_decoder;
 
-use borsh::BorshDeserialize;
 use crate::programs::light_types::{
-    InstructionDataInvoke, InstructionDataInvokeCpi,
+    CompressedAccountInfo, InAccount, InstructionDataInvoke, InstructionDataInvokeCpi,
     InstructionDataInvokeCpiWithAccountInfo, InstructionDataInvokeCpiWithReadOnly,
+    NewAddressParamsAssignedPacked, NewAddressParamsPacked,
     OutputCompressedAccountWithPackedContext, PackedCompressedAccountWithMerkleContext,
-    NewAddressParamsPacked, NewAddressParamsAssignedPacked, PackedReadOnlyAddress,
-    CompressedAccountInfo, InAccount,
+    PackedReadOnlyAddress,
 };
+use borsh::BorshDeserialize;
 use light_instruction_decoder_derive::InstructionDecoder;
 use solana_instruction::AccountMeta;
 use solana_pubkey::Pubkey;
@@ -565,9 +565,24 @@ pub fn resolve_invoke_cpi_readonly_account_names(
     // Normal Mode: Fixed LightSystemAccounts (6 accounts)
     add_name("fee_payer", accounts, &mut idx, &mut known_pubkeys);
     add_name("authority", accounts, &mut idx, &mut known_pubkeys);
-    add_name("registered_program_pda", accounts, &mut idx, &mut known_pubkeys);
-    add_name("account_compression_authority", accounts, &mut idx, &mut known_pubkeys);
-    add_name("account_compression_program", accounts, &mut idx, &mut known_pubkeys);
+    add_name(
+        "registered_program_pda",
+        accounts,
+        &mut idx,
+        &mut known_pubkeys,
+    );
+    add_name(
+        "account_compression_authority",
+        accounts,
+        &mut idx,
+        &mut known_pubkeys,
+    );
+    add_name(
+        "account_compression_program",
+        accounts,
+        &mut idx,
+        &mut known_pubkeys,
+    );
     add_name("system_program", accounts, &mut idx, &mut known_pubkeys);
 
     names
@@ -650,9 +665,24 @@ pub fn resolve_invoke_cpi_account_info_account_names(
     // Normal Mode: Fixed LightSystemAccounts (6 accounts)
     add_name("fee_payer", accounts, &mut idx, &mut known_pubkeys);
     add_name("authority", accounts, &mut idx, &mut known_pubkeys);
-    add_name("registered_program_pda", accounts, &mut idx, &mut known_pubkeys);
-    add_name("account_compression_authority", accounts, &mut idx, &mut known_pubkeys);
-    add_name("account_compression_program", accounts, &mut idx, &mut known_pubkeys);
+    add_name(
+        "registered_program_pda",
+        accounts,
+        &mut idx,
+        &mut known_pubkeys,
+    );
+    add_name(
+        "account_compression_authority",
+        accounts,
+        &mut idx,
+        &mut known_pubkeys,
+    );
+    add_name(
+        "account_compression_program",
+        accounts,
+        &mut idx,
+        &mut known_pubkeys,
+    );
     add_name("system_program", accounts, &mut idx, &mut known_pubkeys);
 
     names

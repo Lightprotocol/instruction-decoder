@@ -35,8 +35,8 @@ syn = { version = "2.0", features = ["visit", "visit-mut", "full"] }
 darling = "0.21"
 heck = "0.5"
 sha2 = "0.10"
-# LiteSVM local fork + pinned transitive deps to match litesvm 3.0.x
-litesvm = { path = "/Users/ananas/dev/litesvm/crates/litesvm" }
+# LiteSVM fork + pinned transitive deps to match litesvm 3.0.x
+litesvm = { git = "https://github.com/Lightprotocol/litesvm.git", branch = "jorrit/feat-get-program-accounts-v3" }
 # Pin litesvm transitive deps to =3.0.5 (litesvm not yet compatible with 3.1.x)
 agave-feature-set = "=3.0.5"
 agave-reserved-account-keys = "=3.0.5"

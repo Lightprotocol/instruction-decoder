@@ -27,6 +27,6 @@ pub mod light_token;
 pub mod registry;
 
 pub use account_compression::AccountCompressionInstructionDecoder;
-pub use light_token::CTokenInstructionDecoder;
 pub use light_system::LightSystemInstructionDecoder;
+pub use light_token::CTokenInstructionDecoder;
 pub use registry::RegistryInstructionDecoder;

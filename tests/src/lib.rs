@@ -143,7 +143,11 @@ fn transaction_log_to_snapshot(log: &EnhancedTransactionLog) -> TransactionSnaps
         status: log.status.text(),
         fee: log.fee,
         compute_used: log.compute_used,
-        instructions: log.instructions.iter().map(instruction_to_snapshot).collect(),
+        instructions: log
+            .instructions
+            .iter()
+            .map(instruction_to_snapshot)
+            .collect(),
     }
 }
 
@@ -231,8 +235,7 @@ fn parse_inner_instructions(
 
         let mut ix_log = EnhancedInstructionLog::new(inner_idx, program_id, program_name);
         ix_log.data = inner_ix.instruction.data.clone();
-        ix_log.accounts =
-            resolve_accounts(&inner_ix.instruction.accounts, account_keys, message);
+        ix_log.accounts = resolve_accounts(&inner_ix.instruction.accounts, account_keys, message);
 
         // stack_height 1 = top-level, 2 = direct CPI child, 3+ = deeper nesting
         let depth = (inner_ix.stack_height as usize).saturating_sub(1);

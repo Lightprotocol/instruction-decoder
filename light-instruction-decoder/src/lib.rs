@@ -52,9 +52,8 @@ pub use formatter::{Colors, TransactionFormatter};
 #[cfg(not(target_os = "solana"))]
 pub use programs::{
     AccountCompressionInstructionDecoder, CTokenInstructionDecoder,
-    ComputeBudgetInstructionDecoder, LightSystemInstructionDecoder,
-    RegistryInstructionDecoder, SplTokenInstructionDecoder, SystemInstructionDecoder,
-    Token2022InstructionDecoder,
+    ComputeBudgetInstructionDecoder, LightSystemInstructionDecoder, RegistryInstructionDecoder,
+    SplTokenInstructionDecoder, SystemInstructionDecoder, Token2022InstructionDecoder,
 };
 // Re-export registry
 #[cfg(not(target_os = "solana"))]

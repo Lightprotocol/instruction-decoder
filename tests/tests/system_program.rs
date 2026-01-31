@@ -17,8 +17,7 @@ fn deterministic_keypair(seed_byte: u8) -> Keypair {
 fn setup() -> (LiteSVM, Keypair) {
     let mut svm = LiteSVM::new();
     let payer = deterministic_keypair(1);
-    svm.airdrop(&payer.pubkey(), 10 * LAMPORTS_PER_SOL)
-        .unwrap();
+    svm.airdrop(&payer.pubkey(), 10 * LAMPORTS_PER_SOL).unwrap();
     (svm, payer)
 }
 
