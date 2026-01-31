@@ -29,6 +29,10 @@ pub use solana_signature;
 mod core;
 pub use core::{DecodedField, DecodedInstruction, InstructionDecoder};
 
+// LiteSVM integration (off-chain only, behind feature flag)
+#[cfg(all(feature = "litesvm", not(target_os = "solana")))]
+pub mod litesvm;
+
 // Off-chain only modules (uses tabled, derive macros, DecoderRegistry)
 #[cfg(not(target_os = "solana"))]
 pub mod config;

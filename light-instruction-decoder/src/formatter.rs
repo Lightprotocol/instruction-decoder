@@ -223,7 +223,7 @@ struct AccountRow {
     name: String,
 }
 
-/// Row for outer instruction account table display (7 columns - includes account state)
+/// Row for outer instruction account table display (8 columns - includes account state + owner)
 #[derive(Tabled)]
 struct OuterAccountRow {
     #[tabled(rename = "#")]
@@ -234,6 +234,8 @@ struct OuterAccountRow {
     access: String,
     #[tabled(rename = "Name")]
     name: String,
+    #[tabled(rename = "Owner")]
+    owner: String,
     #[tabled(rename = "Data Len")]
     data_len: String,
     #[tabled(rename = "Lamports")]
@@ -707,7 +709,7 @@ impl TransactionFormatter {
                         .unwrap_or_else(|| self.get_account_name(&account.pubkey));
 
                     // Get account state if available
-                    let (data_len, lamports, lamports_change) = if let Some(state) =
+                    let (owner, data_len, lamports, lamports_change) = if let Some(state) =
                         states.get(&account.pubkey)
                     {
                         let change = (state.lamports_after as i128 - state.lamports_before as i128)
@@ -720,13 +722,25 @@ impl TransactionFormatter {
                         } else {
                             "0".to_string()
                         };
+                        let owner_pubkey_str = state.owner.to_string();
+                        let owner_str = if owner_pubkey_str.len() >= 5 {
+                            owner_pubkey_str[..5].to_string()
+                        } else {
+                            owner_pubkey_str
+                        };
                         (
+                            owner_str,
                             format_with_thousands_separator(state.data_len_before as u64),
                             format_with_thousands_separator(state.lamports_before),
                             change_str,
                         )
                     } else {
-                        ("-".to_string(), "-".to_string(), "-".to_string())
+                        (
+                            "-".to_string(),
+                            "-".to_string(),
+                            "-".to_string(),
+                            "-".to_string(),
+                        )
                     };
 
                     outer_rows.push(OuterAccountRow {
@@ -734,6 +748,7 @@ impl TransactionFormatter {
                         pubkey: account.pubkey.to_string(),
                         access: access.text().to_string(),
                         name: account_name,
+                        owner,
                         data_len,
                         lamports,
                         lamports_change,

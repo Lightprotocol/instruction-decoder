@@ -1,11 +1,11 @@
 use instruction_decoder_tests::{
-    decode_transaction, decode_transaction_snapshot, format_transaction, LiteSVM,
+    capture_account_states, decode_transaction, decode_transaction_snapshot, format_transaction,
+    strip_ansi_codes, LiteSVM,
 };
 use light_instruction_decoder::EnhancedLoggingConfig;
 use solana_keypair::{keypair_from_seed, Keypair};
 use solana_message::Message;
 use solana_native_token::LAMPORTS_PER_SOL;
-use solana_pubkey::Pubkey;
 use solana_signer::Signer;
 use solana_system_interface::instruction as system_instruction;
 use solana_transaction::Transaction;
@@ -30,9 +30,14 @@ fn test_decode_transfer() {
     let tx = Transaction::new(&[&payer], msg, svm.latest_blockhash());
     let versioned_tx = solana_transaction::versioned::VersionedTransaction::from(tx);
 
+    let pre_states = capture_account_states(&svm, &versioned_tx);
     let result = svm.send_transaction(versioned_tx.clone());
-    let config = EnhancedLoggingConfig::default();
-    let snapshot = decode_transaction_snapshot(&versioned_tx, &result, &config);
+    let post_states = capture_account_states(&svm, &versioned_tx);
+
+    let config = EnhancedLoggingConfig::debug();
+    let snapshot = decode_transaction_snapshot(
+        &versioned_tx, &result, &config, Some(&pre_states), Some(&post_states),
+    );
 
     assert_eq!(snapshot.status, "Success");
     assert_eq!(snapshot.instructions.len(), 1);
@@ -42,11 +47,14 @@ fn test_decode_transfer() {
         Some("Transfer")
     );
 
-    let log = decode_transaction(&versioned_tx, &result, &config);
-    let formatted = format_transaction(&log, &config, 1);
-    eprintln!("{formatted}");
-
     insta::assert_json_snapshot!("transfer", snapshot);
+
+    let log = decode_transaction(
+        &versioned_tx, &result, &config, Some(&pre_states), Some(&post_states),
+    );
+    let formatted = format_transaction(&log, &config, 1);
+    let stripped = strip_ansi_codes(&formatted);
+    insta::assert_snapshot!("transfer_table", stripped);
 }
 
 #[test]
@@ -65,9 +73,14 @@ fn test_decode_create_account() {
     let tx = Transaction::new(&[&payer, &new_account], msg, svm.latest_blockhash());
     let versioned_tx = solana_transaction::versioned::VersionedTransaction::from(tx);
 
+    let pre_states = capture_account_states(&svm, &versioned_tx);
     let result = svm.send_transaction(versioned_tx.clone());
-    let config = EnhancedLoggingConfig::default();
-    let snapshot = decode_transaction_snapshot(&versioned_tx, &result, &config);
+    let post_states = capture_account_states(&svm, &versioned_tx);
+
+    let config = EnhancedLoggingConfig::debug();
+    let snapshot = decode_transaction_snapshot(
+        &versioned_tx, &result, &config, Some(&pre_states), Some(&post_states),
+    );
 
     assert_eq!(snapshot.status, "Success");
     assert_eq!(snapshot.instructions.len(), 1);
@@ -77,6 +90,13 @@ fn test_decode_create_account() {
     );
 
     insta::assert_json_snapshot!("create_account", snapshot);
+
+    let log = decode_transaction(
+        &versioned_tx, &result, &config, Some(&pre_states), Some(&post_states),
+    );
+    let formatted = format_transaction(&log, &config, 1);
+    let stripped = strip_ansi_codes(&formatted);
+    insta::assert_snapshot!("create_account_table", stripped);
 }
 
 #[test]
@@ -91,9 +111,14 @@ fn test_decode_allocate_and_assign() {
     let tx = Transaction::new(&[&payer, &account], msg, svm.latest_blockhash());
     let versioned_tx = solana_transaction::versioned::VersionedTransaction::from(tx);
 
+    let pre_states = capture_account_states(&svm, &versioned_tx);
     let result = svm.send_transaction(versioned_tx.clone());
-    let config = EnhancedLoggingConfig::default();
-    let snapshot = decode_transaction_snapshot(&versioned_tx, &result, &config);
+    let post_states = capture_account_states(&svm, &versioned_tx);
+
+    let config = EnhancedLoggingConfig::debug();
+    let snapshot = decode_transaction_snapshot(
+        &versioned_tx, &result, &config, Some(&pre_states), Some(&post_states),
+    );
 
     assert_eq!(snapshot.status, "Success");
     assert_eq!(snapshot.instructions.len(), 2);
@@ -107,4 +132,11 @@ fn test_decode_allocate_and_assign() {
     );
 
     insta::assert_json_snapshot!("allocate_and_assign", snapshot);
+
+    let log = decode_transaction(
+        &versioned_tx, &result, &config, Some(&pre_states), Some(&post_states),
+    );
+    let formatted = format_transaction(&log, &config, 1);
+    let stripped = strip_ansi_codes(&formatted);
+    insta::assert_snapshot!("allocate_and_assign_table", stripped);
 }

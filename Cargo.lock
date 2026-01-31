@@ -2052,10 +2052,13 @@ dependencies = [
  "borsh 1.6.0",
  "bs58",
  "light-instruction-decoder-derive",
+ "litesvm",
  "serde",
  "solana-instruction 3.1.0",
+ "solana-message",
  "solana-pubkey 3.0.0",
  "solana-signature",
+ "solana-transaction",
  "tabled",
 ]
 

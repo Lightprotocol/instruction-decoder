@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-light-instruction-decoder = { workspace = true }
+light-instruction-decoder = { workspace = true, features = ["litesvm"] }
 litesvm = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }

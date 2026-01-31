@@ -8,6 +8,10 @@ edition = "2021"
 [lints.rust]
 unexpected_cfgs = { level = "warn", check-cfg = ['cfg(target_os, values("solana"))'] }
 
+[features]
+default = ["litesvm"]
+litesvm = ["dep:litesvm", "dep:solana-transaction", "dep:solana-message"]
+
 [dependencies]
 solana-pubkey = { workspace = true }
 solana-instruction = { workspace = true }
@@ -16,6 +20,9 @@ borsh = { workspace = true }
 bs58 = { workspace = true }
 serde = { workspace = true }
 light-instruction-decoder-derive = { workspace = true }
+litesvm = { workspace = true, optional = true }
+solana-transaction = { workspace = true, optional = true }
+solana-message = { workspace = true, optional = true }
 
 [target.'cfg(not(target_os = "solana"))'.dependencies]
 tabled = { workspace = true }
