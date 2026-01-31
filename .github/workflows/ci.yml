@@ -12,7 +12,7 @@ concurrency:
 
 env:
   SOLANA_CLI_VERSION: "2.2.13"
-  RUST_TOOLCHAIN: "1.86.0"
+  RUST_TOOLCHAIN: "1.93.0"
 
 jobs:
   lint:

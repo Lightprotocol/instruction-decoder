@@ -2,6 +2,7 @@
 set dotenv-load
 
 export SBF_OUT_DIR := "target/deploy"
+RUST_TOOLCHAIN := "1.93.0"
 
 default:
     @just --list
@@ -20,7 +21,7 @@ test: build-sbf
 # === Lint & Format ===
 lint:
     cargo +nightly fmt --all -- --check
-    cargo clippy --workspace \
+    cargo +{{RUST_TOOLCHAIN}} clippy --workspace \
         --no-deps \
         -- -A unexpected-cfgs \
            -D warnings
